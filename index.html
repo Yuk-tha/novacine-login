@@ -5,16 +5,50 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>NovaCine</title>
-    <script>
-      var redirect = sessionStorage.getItem('redirect');
-      if (redirect) {
-        sessionStorage.removeItem('redirect');
-        window.history.replaceState(null, null, redirect);
+    <style>
+      body {
+        background-color: #000;
+        margin: 0;
+        padding: 0;
       }
-    </script>
+      #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #000;
+      }
+      #loading h1 {
+        font-size: 3rem;
+        font-weight: 900;
+        font-family: Arial, sans-serif;
+        letter-spacing: 0.2em;
+      }
+      #loading span.red { color: #dc2626; }
+      #loading span.white { color: #ffffff; }
+    </style>
   </head>
   <body>
+    <!-- Shows while React is loading -->
+    <div id="loading">
+      <h1>
+        <span class="red">Nova</span>
+        <span class="white">Cine</span>
+      </h1>
+    </div>
+
     <div id="root"></div>
+
     <script type="module" src="/src/main.jsx"></script>
+
+    <script>
+      // Hide loading screen once React mounts
+      window.addEventListener('load', () => {
+        setTimeout(() => {
+          const loading = document.getElementById('loading')
+          if (loading) loading.style.display = 'none'
+        }, 500)
+      })
+    </script>
   </body>
 </html>
